@@ -148,40 +148,39 @@ const fig_7 = {
           "view": {"stroke": null}
         },
         {
-        "title": {"text": "Minority Race Breakdown (Counts, % of all, % of minority)", "anchor": "start", "fontSize": 12},
-        "data": {"url": "/data/fatal_overdoses_allegheny_only.csv"},
-          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
-        "transform": [
-            {
-            "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
-            "as": "race_label"
+            "title": {"text": "Minority Race Breakdown (Counts, % of all, % of minority)", "anchor": "start", "fontSize": 12},
+            "data": {"url": "/data/fatal_overdoses_allegheny_only.csv"},
+            "transform": [
+                {
+                "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
+                "as": "race_label"
+                },
+                {"aggregate": [{"op": "count", "as": "cases"}], "groupby": ["race_label"]},
+
+                /* compute overall total BEFORE filtering to minority */
+                {"joinaggregate": [{"op": "sum", "field": "cases", "as": "total_all"}]},
+                {"calculate": "datum.cases / datum.total_all", "as": "pct_all"},
+
+                /* now filter to minority races only */
+                {"filter": "datum.race_label != 'White' && datum.race_label != 'Black'"},
+
+                /* compute minority-only total AFTER the filter */
+                {"joinaggregate": [{"op": "sum", "field": "cases", "as": "total_minority"}]},
+                {"calculate": "datum.cases / datum.total_minority", "as": "pct_minority"},
+
+                {
+                "calculate": "datum.race_label + ': ' + datum.cases + ' (' + format(datum.pct_all, '.1%') + ' of all; ' + format(datum.pct_minority, '.1%') + ' of minority)'",
+                "as": "row_text"
+                },
+                {"sort": [{"field": "cases", "order": "descending"}]}
+            ],
+            "mark": {"type": "text", "align": "left"},
+            "encoding": {
+                "y": {"field": "race_label", "type": "nominal", "axis": null, "sort": {"field": "cases", "order": "descending"}},
+                "text": {"field": "row_text", "type": "nominal"},
+                "size": {"value": 11}
             },
-            {"aggregate": [{"op": "count", "as": "cases"}], "groupby": ["race_label"]},
-
-            /* compute overall total BEFORE filtering to minority */
-            {"joinaggregate": [{"op": "sum", "field": "cases", "as": "total_all"}]},
-            {"calculate": "datum.cases / datum.total_all", "as": "pct_all"},
-
-            /* now filter to minority races only */
-            {"filter": "datum.race_label != 'White' && datum.race_label != 'Black'"},
-
-            /* compute minority-only total AFTER the filter */
-            {"joinaggregate": [{"op": "sum", "field": "cases", "as": "total_minority"}]},
-            {"calculate": "datum.cases / datum.total_minority", "as": "pct_minority"},
-
-            {
-            "calculate": "datum.race_label + ': ' + datum.cases + ' (' + format(datum.pct_all, '.1%') + ' of all; ' + format(datum.pct_minority, '.1%') + ' of minority)'",
-            "as": "row_text"
-            },
-            {"sort": [{"field": "cases", "order": "descending"}]}
-        ],
-        "mark": {"type": "text", "align": "left"},
-        "encoding": {
-            "y": {"field": "race_label", "type": "nominal", "axis": null, "sort": {"field": "cases", "order": "descending"}},
-            "text": {"field": "row_text", "type": "nominal"},
-            "size": {"value": 11}
-        },
-        "height": 110
+            "height": 110
         }
 
       ],
