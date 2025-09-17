@@ -207,7 +207,7 @@ const fig_7 = {
         },
         "tooltip": [
           {"field": "sex_label", "type": "nominal", "title": "Gender"},
-            "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
+          {"field": "cases", "type": "quantitative", "title": "Cases"},
           {"field": "pct", "type": "quantitative", "title": "Share", "format": ".1%"}
         ]
       },
@@ -247,7 +247,7 @@ const fig_7 = {
     }
   ],
   "config": {
-          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
+    "view": {"stroke": null}
   }
 };
 
@@ -274,7 +274,6 @@ const fig_8B = {
   "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
   "title": "Overdose Cases by Sex and Year",
   "transform": [
-          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
     {"filter": "datum.case_year == 2007 || datum.case_year == 2016 || datum.case_year == 2017 || datum.case_year == 2023"}
   ],
   "mark": "bar",
