@@ -120,7 +120,7 @@ const fig_7 = {
       "vconcat": [
         {
           "title": "Fatal Overdose Cases by Race",
-          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
+    // ...existing code...
           "transform": [
             {
               "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
@@ -150,7 +150,7 @@ const fig_7 = {
         {
         "title": {"text": "Minority Race Breakdown (Counts, % of all, % of minority)", "anchor": "start", "fontSize": 12},
         "data": {"url": "/data/fatal_overdoses_allegheny_only.csv"},
-          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
+          // ...existing code...
         "transform": [
             {
             "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
@@ -208,7 +208,7 @@ const fig_7 = {
         },
         "tooltip": [
           {"field": "sex_label", "type": "nominal", "title": "Gender"},
-          {"field": "cases", "type": "quantitative", "title": "Cases"},
+            "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
           {"field": "pct", "type": "quantitative", "title": "Share", "format": ".1%"}
         ]
       },
@@ -248,7 +248,7 @@ const fig_7 = {
     }
   ],
   "config": {
-    "view": {"stroke": null}
+          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
   }
 };
 
@@ -275,7 +275,7 @@ const fig_8B = {
   "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Overdose Cases by Sex and Year",
   "transform": [
-    {"filter": "datum.sex === 'M' || datum.sex === 'F'"},
+          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
     {"filter": "datum.case_year == 2007 || datum.case_year == 2016 || datum.case_year == 2017 || datum.case_year == 2023"}
   ],
   "mark": "bar",
