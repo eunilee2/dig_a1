@@ -1,6 +1,6 @@
 
 const fig_1 = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Number of Fatal Overdose Cases by Year",
   "width": 400,
   "height": 350,
@@ -13,7 +13,7 @@ const fig_1 = {
 
 // Aggregate by Month
 const fig_2 = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Number of Fatal Overdose Cases by Month (Colored by Season)",
   "transform": [
     {
@@ -63,7 +63,7 @@ const fig_2 = {
 };
 
 const fig_3 = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Number of Fatal Overdose Cases by Day of Week",
   "transform": [
     {
@@ -95,7 +95,7 @@ const fig_3 = {
 };
 
 const fig_4 = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Top Ten Zips: Number of Fatal Overdose Cases by Zip (Aggregate 2007-2024)",
   "transform": [
     {"calculate": "datum.incident_zip === null || datum.incident_zip === '' ? 'Unknown Zip' : datum.incident_zip", "as": "incident_zip"},
@@ -120,7 +120,7 @@ const fig_7 = {
       "vconcat": [
         {
           "title": "Fatal Overdose Cases by Race",
-          "data": {"url": "/data/fatal_overdoses_allegheny_only.csv"},
+          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
           "transform": [
             {
               "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
@@ -150,6 +150,7 @@ const fig_7 = {
         {
         "title": {"text": "Minority Race Breakdown (Counts, % of all, % of minority)", "anchor": "start", "fontSize": 12},
         "data": {"url": "/data/fatal_overdoses_allegheny_only.csv"},
+          "data": {"url": "data/fatal_overdoses_allegheny_only.csv"},
         "transform": [
             {
             "calculate": "datum.race == 'W' ? 'White' : datum.race == 'B' ? 'Black' : datum.race == 'H' ? 'Hispanic' : datum.race == 'A' ? 'Asian' : datum.race == 'I' ? 'American Indian/Alaska Native' : datum.race == 'M' ? 'Mixed' : datum.race == 'O' ? 'Other' : 'Unknown'",
@@ -253,7 +254,7 @@ const fig_7 = {
 
 
 const fig_8A = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Overdose Cases by Race (Black/White) and Year",
   "transform": [
     {"filter": "datum.race === 'B' || datum.race === 'W'"},
@@ -271,7 +272,7 @@ const fig_8A = {
 };
 
 const fig_8B = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Overdose Cases by Sex and Year",
   "transform": [
     {"filter": "datum.sex === 'M' || datum.sex === 'F'"},
@@ -289,7 +290,7 @@ const fig_8B = {
 };
 
 const fig_8C = {
-  "data": {"url": "/data/fatal_overdoses_2007_2025.csv"},
+  "data": {"url": "data/fatal_overdoses_2007_2025.csv"},
   "title": "Overdose Cases by Age Group and Year",
   "transform": [
     {"filter": "datum.case_year == 2007 || datum.case_year == 2016 || datum.case_year == 2017 || datum.case_year == 2023"},
@@ -312,7 +313,7 @@ const fig_8C = {
 
 
 const fig_9 = {
-  "data": {"url": "/data/fatal_overdoses_allegheny_only_long.csv"},
+  "data": {"url": "data/fatal_overdoses_allegheny_only_long.csv"},
   "title": "Most Common Drugs in Fatal Overdose Cases (Any Involvement)",
   "transform": [
     {"aggregate": [{"op": "count", "as": "case_count"}], "groupby": ["drug"]},
@@ -343,7 +344,7 @@ const fig_9 = {
 };
 
 const fig_10 = {
-  "data": {"url": "/data/fatal_overdoses_allegheny_only_drugtype.csv"},
+  "data": {"url": "data/fatal_overdoses_allegheny_only_drugtype.csv"},
   "title": "Single Drug vs. Polysubstance Overdose Cases",
   "transform": [
     {"filter": "datum.drug_case_type === 'Single' || datum.drug_case_type === 'Poly'"},
