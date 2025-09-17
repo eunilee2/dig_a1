@@ -91,6 +91,12 @@ main {
 	padding: 0.1rem 2rem;
 }
 
+section {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Figures */
 
 figure {
@@ -101,6 +107,13 @@ figure {
 	box-shadow: 0 .1em .2em var(--color-neutral-95);
 	text-align: center;
 	background: white;
+	max-width: 100%;
+	height: auto;
+
+	> img, > svg {
+		max-width: 100%;
+		height: auto;
+	}
 
 	> figcaption {
 		font: 500 75% var(--font-sans);

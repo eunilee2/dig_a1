@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <!-- saved from url=(0064)https://dig.cmu.edu/datavis-fall-2025/assignments/A1_report.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Data Vis Assignment 1</title>
-	<link rel="stylesheet" href="./report.css">
-</head>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Data Vis Assignment 1</title>
+		<link rel="stylesheet" href="./report.css">
+		<link rel="icon" href="/images/pgh_bridge.png" type="image/png">
+		
+		<!-- from vega embed -->
+		<!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+		<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+		<!-- Import vega-embed -->
+		<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+		<!-- Import the visualizations via separate script -->
+		<script src="charts.js" defer></script>
+
+	</head>
 
 <body>
 	<header>
@@ -41,102 +54,253 @@
 				<li>How have fatal overdoses in Allegheny County changed over time?</li>
 				<li>How do overdose patterns vary across space?</li>
 				<li>Which demographic groups are the most impacted, and how do their patterns differ?</li>
-				<li>What does polysubstance use look like in these overdose cases?</li>
+				<li>What does polysubstance use look like in these overdose cases? How about single substance?</li>
 			</ol>
 		</section>
 
 		<section>
 			<h2>Discoveries &amp; Insights</h2>
+			<p>
+				To determine the current state of the dataset, we will first understand the distribution of the data respective to the temporal, 
+				spatial, and categorical features that our analysis questions. By doing these basic statistical analysis, we are then able to 
+				minimize the bias in our assumptions and follow-up questions that will explore our overall questions further. 
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_1"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Number of fatal overdose cases increased overall from 2007 to 2023, with a sharp increase in 2016 and 2017.
 				</figcaption>
 			</figure>
+			<p>
+				We first look at our dataset using a univariate analysis. By mapping the aggregate fatal 
+				overdose cases by each year between 2007 and 2025, we can make several observations. The 
+				first observation is that there is an overall increase in the number of overdose cases 
+				from the years 2007-2023. During those years, there was a remarkably large number of 
+				cases in 2016 and 2017. <br><br>
+				By looking further into reports about this sharp increase in opioid deaths, we find that 
+				there is no conclusive reason for why the number of cases had jumped drastically. We can, 
+				however, attribute the decline of deaths post 2017 to the widespread distribution efforts 
+				of the anti-overdose drug naloxone in which the county Health Department 
+				<a href="https://triblive.com/local/pittsburgh-allegheny/officials-allegheny-county-overdose-deaths-dropped-significantly-last-year/#:~:text=Williams%20credited%20the%20availability%20of,deaths%20about%20a%20decade%20ago.">distributed more 
+				than 8000 kits.</a><br><br>
+				Considering these observations and the low number of cases for 2025 (which we can attribute 
+				to the fact that cases may not be filed in just yet), following analyses will look at the 
+				years 2007-2024 with special emphasis on the years 2016-2017 in hopes to uncover the unknown 
+				causes for the sharp increase in deaths. 
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_3"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Number of fatal overdose cases by day of week and time of day.
 				</figcaption>
 			</figure>
+			<p>
+				We next turn to analyzing fatal overdose cases by day of the week. This perspective highlights 
+				how overdoses align with the rhythms of daily life rather than long-term trends. We find that 
+				the lowest number of cases occur on Mondays, with counts gradually increasing throughout the 
+				week and peaking on weekends, particularly on Saturday. <br><br>
+				This weekly pattern suggests that social and recreational behaviors, stress cycles, or 
+				availability of substances may play a role in shaping risk across the week. While these 
+				observations cannot fully explain the causes of overdoses, they provide important context for how 
+				everyday temporal patterns contribute to the broader annual trends identified earlier.
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_2"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Number of fatal overdose cases by month, colored by season.
 				</figcaption>
 			</figure>
+			<p>
+				Analyzing fatal overdoses by month reveals a seasonal pattern: cases tend to peak in the spring 
+				months, with April standing out at 689 cases, while winter and fall months report some of the lowest counts. 
+				December breaks this trend, with cases rising again, possibly reflecting holiday-related stress or gatherings.
+				<br><br>
+				These patterns suggest that <a href="https://pubmed.ncbi.nlm.nih.gov/36843423/"> seasonal factors such as 
+				environmental stressors and social behaviors may shape overdose risk</a>, warranting further exploration. 
+				Following analyses will compare these seasonal cycles with other temporal factors, such as demographics 
+				and geographic distribution, to better understand how context influences overdose deaths."
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_4"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Top 10 zip codes with the highest number of overdose cases from 2007-2024.
 				</figcaption>
 			</figure>
+			<p>
+				Now that we have a temporal understanding of the dataset, we also will take a look at the spatial 
+				context of the dataset. Using a simple bar graph in which we transformed our dataset to exclude 
+				2025 (as the year is not done yet and cases are not fully filed), we are able to see the top 10 zip 
+				codes where the highest number of overdose cases have been filed. While we note that the dataset 
+				describes the incident zip codes in this dataset as not actually equating to where the overdose has 
+				taken place (rather, the incident zip code is the zip code where the Office of the Medical Examiner 
+				has received the body), we can assume that the incident zip code is handled at the site or nearby 
+				the vicinity of the overdose death following the 
+				<a href="https://www.alleghenycounty.us/Government/Police-and-Emergency-Services/Medical-Examiner-ACOME/Death-Investigations#:~:text=The%20pathologist%20decides%20whether%20an,Statistics%20via%20the%20Funeral%20Director.">
+					protocols that the Office must follow. 
+				</a>
+				<br><br>
+				One thing to note is that there is a non-trival number (n=224) of cases where the incident zip code 
+				is unknown. Considering that 224 cases is only 3% of the total 7,478 cases in our dataset, it would 
+				not severely affect our overall dataset if we were to remove these cases in the following visualizations. 
+				To address this data quality issue, for the following visualizations that showcase our data on a map, 
+				we will remove these extraneous cases that are outside of our scope (null values or outside of Allegheny 
+				County) within a reasonable percentage of our overall dataset. 
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<img src="/images/fig_5.png" alt="Choropleth map of overdose cases by ZIP code">
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Choropleth map of overdose cases by ZIP code.
 				</figcaption>
 			</figure>
+			<p>
+				Addressing the data quality issue prior, we find that we actually have 6.6% of our dataset affected when 
+				mapping our cases spatially on maps as seen above. This 6.6% accounts for the 224 cases of null/unknown 
+				zip code cases and also the 273 cases of extraneous zip codes that fall outside of Allegheny County, 
+				bringing a total of 497 cases that are excluded in the dataset we are currently examining for our spatial 
+				analysis. Just like prior, we will continue to use this processed dataset when continuing with the remainder 
+				of our exploratory visualizations given the scope of our questions and also the small percentage of overall 
+				cases these malformed/out of scope cases take up. <br><br>
+				Regarding the actual results of our choropleth above, which maps the aggregate count of cases over each zip 
+				code in Allegheny County, we find that high counts of overdose cases are mainly centered at or nearby the 
+				metropolitan area of the county in Pittsburgh. In fact, the highest count of overdose cases is found at zip 
+				15210, which is the Mount Oliver neighborhood, at 388 cases. Other key zip codes include 15212, 15132, 15136, and 15216. 
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<img src="/images/fig_6.png" alt="Choropleth map of overdose cases by ZIP code, over the years 2007-2023">
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Choropleth map of overdose cases by ZIP code, over the years 2007-2023.
 				</figcaption>
 			</figure>
+			<p>
+				Going back to our very first analysis, in which we found that there was a steady increase in overdose deaths 
+				over the years but with particularly large outlier cases in 2016 and 2017, we apply that interest to our 
+				spatial analysis. By mapping selected years, we can see how the distribution of fatal overdoses has shifted 
+				across Allegheny County over time. <br><br>
+				In 2007, cases were relatively low and dispersed, with the highest ZIP reporting only 10 deaths. By 2016 and 
+				2017, however, overdoses became much more concentrated in neighborhoods near the city of Pittsburgh, particularly 
+				in ZIPs 15210, 15212, and 15136, each reporting close to or over 30 deaths. In 2023, while 15210 still reports the highest 
+				count, other ZIPs such as 15219 and 15212 also emerge with elevated cases, suggesting that while the crisis 
+				remains centered in the metropolitan area, its geographic footprint has broadened. These findings show not 
+				only the intensification of the crisis during the mid-2010s but also how its spatial distribution continues 
+				to evolve over time.
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_7"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Fatal overdose case aggregate by race, gender, and age group. 
 				</figcaption>
 			</figure>
+			<p>
+				Next, we must also consider who is most impacted by these overdose cases. By examining 3 separate pie charts 
+				of relevant demographic data (race, gender, and age), we find a series of interesting observations. To start 
+				with race, white cases make up the majority of cases at 79.4% (n=5428) and black cases a significant second 
+				majority of cases at 19.6% (n=1343). The remainder of races (Hispanic, Other, Asian, Mixed, Unknown, and 
+				Native American) make up 1% of the cases. For sex, we find that the majority of cases are represented by the 
+				male demographic (68.5%) while the female demographic makes up the minority (31.5%). For ages, we bucket the 
+				ages into the following: 0-24, 25-34, 35-44, 45-54, 55-64, and 65+. Within these age buckets, we find that 3 
+				age groups make up the majority and are evenly split: 25-34 bucket makes up 23.5% of cases, 35-44 makes up 
+				24.5% of cases, and 45-54 makes up 24.6% of cases. <br><br>
+				From these findings, we can then start to contextualize who is most at risk within Allegheny County. The 
+				demographic patterns suggest that fatal overdoses are not evenly distributed across the population, but rather 
+				concentrated among White and Black communities, with other races making up only a small fraction of cases. 
+				The strong male majority reflects broader national trends in substance use and overdose outcomes, highlighting 
+				potential gendered risk factors. Meanwhile, the concentration of cases among adults in their mid-20s through 
+				mid-50s underscores that prime working-age individuals bear the heaviest burden of the crisis. <br><br>
+				Together, these observations indicate that the overdose epidemic disproportionately affects men in early-to-mid 
+				adulthood within White and Black populations. This demographic concentration raises important questions about 
+				structural inequities, access to treatment and prevention resources, and the social and economic conditions 
+				that exacerbate overdose risk.
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_8A"></div>
+				<div id="fig_8B"></div>
+				<div id="fig_8C"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Fatal Overdose Cases by Race (Black and White), Sex (Male and Female), and Age Group.
 				</figcaption>
 			</figure>
+			<p>
+				Now that we have explored the overall summary of this demographic data, we will next explore key demographics 
+				in a temporal context to better understand how certain populations are improving or worsening over time. By gaining
+				 these insights, we can determine what current policies are failing, and how we can better target future interventions 
+				 to help these particular groups. <br><br>
+				To start, we see that for race, cases of Black overdoses are steadily increasing with the highest number of cases being 
+				the most recent in 2023. Meanwhile, the cases for White overdoses rapidly peaked in 2016 and 2017, coming down to lower 
+				but still increased levels in 2023. <br><br>
+				We also note that for sex, the overall number of male cases has consistently been higher than female cases across all years. 
+				Both groups saw their highest peaks in 2017, but while male cases dropped more sharply in 2023, female cases remain elevated 
+				to similar levels from 2017, highlighting the persistence of the crisis among women. <br><br>
+				Turning to age, we find that the burden of overdoses is most concentrated among individuals in the 25–54 age range. All three 
+				of these core age groups (25–34, 35–44, and 45–54) spiked in 2016–2017, with some recovery afterward, but they still report 
+				elevated cases in 2023 compared to earlier years. Younger individuals (0–24) show relatively few cases overall, while cases 
+				among those aged 55–64 have steadily increased over time, suggesting the epidemic is also extending into older populations.<br><br>
+				Taken together, these demographic trends show that while some groups experienced declines after the mid-2010s peak, many populations 
+				remain at heightened risk, underscoring the need for targeted, sustained interventions tailored to both age and sex.
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_9"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Most Common Drugs in Fatal Overdose Cases (Any Involvement).
 				</figcaption>
 			</figure>
+			<p>
+				Shifting our attention from demographics to substances, we next examine which drugs are most commonly involved in fatal overdose 
+				cases. Unsurprisingly, fentanyl dominates the dataset, appearing in nearly 3,900 cases, reflecting its well-documented role as 
+				the primary driver of the overdose crisis. Cocaine and heroin follow as the next most common substances, with alcohol also appearing 
+				frequently in combination with other drugs. Beyond these leading contributors, prescription and synthetic opioids such as alprazolam, 
+				acetyl fentanyl, para-fluorofentanyl, oxycodone, methadone, and morphine appear in smaller but still significant numbers. These findings 
+				highlight that while fentanyl remains the most lethal factor, polysubstance use (including combinations of opioids, stimulants, and alcohol) 
+				continues to play a critical role in sustaining high fatality rates.
+			</p>
 
 			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
+				<div id="fig_10"></div>
 				<figcaption>
-				ENTER IMAGE CAPTION HERE.
+				Mono vs Polysubstance Use in Fatal Overdose Cases.
 				</figcaption>
 			</figure>
+			<p>
+				Building on our analysis of drug types, we next compare single-drug overdose cases to those involving multiple substances. The results 
+				reveal a striking imbalance: polysubstance overdoses account for the vast majority of cases (n=5,539), while single-drug overdoses 
+				represent a much smaller portion (n=1,300). This finding emphasizes that fatal overdoses are rarely attributable to one substance 
+				alone, but more often the result of dangerous drug interactions. The prominence of polysubstance cases suggests that interventions 
+				must address not only the risks of individual drugs like fentanyl, but also the compounding dangers of combining opioids with stimulants, 
+				alcohol, or other substances.
+			</p>
 
-			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
-
-			<figure>
-				<img src="./Data Vis Assignment 1 Template_files/IMAGE_FILENAME" alt="">
-				<figcaption>
-				ENTER IMAGE CAPTION HERE.
-				</figcaption>
-			</figure>
 		</section>
 
 		<section>
 			<h2>Summary</h2>
 
-			<p>WRITE FINAL SUMMARY HERE.</p>
+			<p>
+				Overall, in this exploratory data analysis, we pose questions in order to meaningfully model and visualize our given dataset. 
+				Doing this investigation, we are able to understand the temporal and spatial context of fatal accidental overdoses. We first 
+				gain insight into our data via simple univariate analyses, and find that fatal overdoses overall increased from 2007 to 2023, 
+				with striking peaks in 2016 and 2017, and that overdoses follow weekly and seasonal rhythms, with cases rising toward weekends 
+				and spring months. These results answer our first two questions by showing how overdoses have changed over time and how patterns 
+				vary across space, as we later confirmed with maps of Allegheny County ZIP codes showing concentrations in Pittsburgh neighborhoods 
+				such as 15210, 15212, and 15136.<br><br>
+				We also delve deeper into exploring our dataset to address our initial questions involving demographic and polysubstance trends. 
+				Demographic breakdowns reveal that overdoses disproportionately impact White and Black residents, men, and adults between 25 and 54 
+				years old. Our temporal demographic analysis further highlights how Black overdoses have steadily risen into 2023, male overdoses 
+				remain consistently higher than female, and older age groups (55–64) are becoming more impacted over time. In addition, examining 
+				the drug dimension shows fentanyl as the most common factor, though cocaine, heroin, and alcohol also play major roles, often in combination. 
+				Indeed, the overwhelming majority of cases are polysubstance, underscoring that fatal overdoses are rarely attributable to a single drug. <br><br>
+				Taken together, these methods and models provide a multidimensional perspective on overdose deaths in Allegheny County. By situating temporal, 
+				spatial, demographic, and substance-related insights side by side, we are able to better understand not only when and where overdoses occur, 
+				but also who is most impacted and what drugs are most responsible. These findings can inform policy efforts to expand prevention, treatment, 
+				and harm reduction strategies, particularly around fentanyl, polysubstance use, and the sustained risks facing working-age and Black communities.
+			</p>
 		</section>
 	</main>
 
